@@ -1,5 +1,14 @@
 //alert("hello from data processing!");
 
+function titleCase(str) {
+    str = str.toLowerCase().split(" ");
+    for(var i = 0; i < str.length; i++){
+        str[i] = str[i].charAt(0).toUpperCase() + str[i].slice(1);
+    }
+    return str.join(" ");
+}
+
+
 const queryString = window.location.search;
 
 
@@ -52,17 +61,21 @@ urlParams.forEach(function(value, key) {
     }else{//process shipping
 
         key = key.split("_").join(" ");
+
+        if(key == "First Name" || key == "Last Name"){
+            value = titleCase(value);
+        }
     //console.log(key, value);
     myData += `<p>${key}: ${value}</p>`;
-
     }
+    
 });
 
     myCart += "Total: " + myTotal + '<br>';
     //we want the cart data first 
     myData = myCart + myData;
 
-    myData += '<p><a href="index.html">ClEAR</a></p>'
+    myData += '<p><a href="index.html">CLEAR</a></p>'
 
     document.getElementById("output").innerHTML = myData;
 }
